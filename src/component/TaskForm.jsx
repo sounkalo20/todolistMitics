@@ -15,19 +15,28 @@ const TaskForm = ({ onCreateTask }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={newTask.title}
-                onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-                placeholder="Titre de la tâche"
-                required
-            />
-            <textarea
-                value={newTask.description}
-                onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-                placeholder="Description de la tâche"
-            />
-            <button type="submit">Ajouter Tâche</button>
+            <div className='todo-input'>
+                <div className='todo-input-item'>
+                    <label htmlFor="">titre</label>
+                    <input
+                        type="text"
+                        value={newTask.title}
+                        onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+                        placeholder="Titre de la tâche"
+                        required
+                    />
+                </div>
+                <div className="todo-input-item">
+                    <label htmlFor="">description</label>
+                    <input
+                        type='text'
+                        value={newTask.description}
+                        onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+                        placeholder="Description de la tâche"
+                    />
+                </div>
+                <button type="submit" className='primaryBtn'>Ajouter Tâche</button>
+            </div>
         </form>
     );
 };

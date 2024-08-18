@@ -38,11 +38,11 @@ const TaskList = () => {
     };
 
     return (
-        <div>
+        <div className='todo-wrapper'>
             <h1>Liste des Tâches</h1>
             {/* Utilisation du composant TaskForm pour ajouter des tâches */}
             <TaskForm onCreateTask={handleCreateTask} />
-            <ul>
+            <div className="todo-list">
                 {tasks.map((task) => (
                     // Utilisation du composant Task pour afficher chaque tâche
                     <Task
@@ -52,7 +52,7 @@ const TaskList = () => {
                         onDeleteTask={handleDeleteTask}
                     />
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };
