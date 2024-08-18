@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
+// Composant pour éditer une tâche
 const TaskEditForm = ({ task, onUpdate }) => {
+    // État local pour stocker les données de la tâche modifiée
     const [editedTask, setEditedTask] = useState({ title: '', description: '' });
 
+    // Effet pour initialiser les champs du formulaire avec les valeurs de la tâche passée en prop
     useEffect(() => {
+        // Met à jour l'état local lorsque la tâche change
         setEditedTask({ title: task.title, description: task.description });
     }, [task]);
 
+    // Fonction pour gérer la soumission du formulaire
     const handleUpdate = (e) => {
         e.preventDefault();
         onUpdate(task.id, editedTask);

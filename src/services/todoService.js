@@ -12,7 +12,7 @@ export const getTasks = async () => {
 export const createTask = async (task) => {
     return await axios.postForm(`${API_URL}/post.php`, task);
 };
-
+// Fonction pour modifier tâche
 export const updateTask = async (id, updatedTask) => {
     try {
         const response = await axios.put(`${API_URL}/put.php`, updatedTask, {

@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Composant pour filtrer les taches
 const TaskFilter = ({ filter, setFilter }) => {
     return (
         <div className='btn-area'>

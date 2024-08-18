@@ -2,6 +2,7 @@ import { faSquarePen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
+// Composant pour afficher une  tâche
 const Task = ({ task, onUpdateTask, onDeleteTask, onEditingTask }) => {
     return (
         <div className='todo-list-item'>
