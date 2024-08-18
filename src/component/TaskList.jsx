@@ -1,5 +1,3 @@
-// src/components/TaskList.js
-
 import React, { useState, useEffect } from 'react';
 import Task from './Task';
 import TaskForm from './TaskForm';
@@ -53,15 +51,25 @@ const TaskList = () => {
             )}
             <TaskFilter filter={filter} setFilter={setFilter} /> {/* Ajout du composant TaskFilter */}
             <div className="todo-list">
-                {filteredTasks.map((task) => (
-                    <Task
-                        key={task.id}
-                        task={task}
-                        onUpdateTask={handleUpdateTask}
-                        onEditingTask={() => setEditingTask(task)}
-                        onDeleteTask={handleDeleteTask}
-                    />
-                ))}
+                {filteredTasks.length === 0 ? (
+                    <h1>
+                        {filter === 'completed'
+                            ? 'Aucune tâche complétée'
+                            : filter === 'incomplete'
+                                ? 'Aucune tâche non complétée'
+                                : 'Aucune tâche ajoutée pour le moment'}
+                    </h1>
+                ) : (
+                    filteredTasks.map((task) => (
+                        <Task
+                            key={task.id}
+                            task={task}
+                            onUpdateTask={handleUpdateTask}
+                            onEditingTask={() => setEditingTask(task)}
+                            onDeleteTask={handleDeleteTask}
+                        />
+                    ))
+                )}
             </div>
         </div>
     );
