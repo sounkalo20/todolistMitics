@@ -1,49 +1,47 @@
 <?php
-require '../connexion_bd.php'; // Inclure le fichier de connexion à la base de données
+require '../connexion_bd.php';
+require '../token/verifyToken.php';
 
-header("Content-Type: application/json"); // Spécifier le type de contenu en JSON
-header("Access-Control-Allow-Origin: *"); // Autoriser toutes les origines
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS"); // Méthodes autorisées
-header("Access-Control-Allow-Headers: Content-Type, Authorization"); // En-têtes autorisés
+header("Access-Control-Allow-Origin: *"); // Autoriser les requêtes depuis n'importe quelle origine
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS"); // Autoriser les méthodes HTTP spécifiques
+header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Autoriser les en-têtes spécifiques
 
-// Répondre aux requêtes OPTIONS
+// Gérer les requêtes OPTIONS pour les pré-demandes CORS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit;
+    http_response_code(200); 
+    exit; 
 }
 
 try {
-    // Vérifier la méthode de la requête
-    if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-        // Récupérer l'identifiant de la tâche à partir de l'URL
-        parse_str(file_get_contents("php://input"), $data);
-        $id = $_GET['id'] ?? null;
+    // Lire les données JSON envoyées dans le corps de la requête
+    $data = json_decode(file_get_contents("php://input"), true);
 
-        if (empty($id)) {
-            throw new Exception('L\'identifiant est obligatoire.');
-        }
-
-        // Préparer la requête pour supprimer la tâche avec l'identifiant donné
-        $stmt = $pdo->prepare("DELETE FROM tasks WHERE id = ?");
-        $result = $stmt->execute([$id]);
-
-        // Vérifier si la suppression a réussi
-        if ($result === false || $stmt->rowCount() === 0) {
-            throw new Exception('La tâche spécifiée n\'existe pas ou n\'a pas pu être supprimée.');
-        }
-
-        // Envoyer une réponse JSON confirmant la suppression de la tâche
-        echo json_encode(['message' => 'Tâche supprimée avec succès']);
-    } else {
-        throw new Exception('Méthode non autorisée.');
+    // Vérifier que le token et l'identifiant sont présents dans les données
+    if (!isset($data['token']) || !isset($data['id'])) {
+        throw new Exception('Token or ID is missing'); 
     }
 
+    // Vérifier la validité du token
+    verifyToken($data['token']);
+
+    // Préparer la requête SQL pour supprimer la tâche spécifiée par l'identifiant
+    $stmt = $pdo->prepare("DELETE FROM tasks WHERE id = :id");
+    $stmt->bindParam(':id', $data['id']);
+
+    // Exécuter la requête et vérifier si l'exécution a réussi
+    if ($stmt->execute() === false) {
+        throw new Exception('Erreur lors de la suppression de la tâche.'); 
+    }
+
+    // Répondre avec un message de succès en cas de suppression réussie
+    echo json_encode(['message' => 'Tâche supprimée avec succès']);
+
 } catch (Exception $e) {
-    // Capturer et gérer les exceptions
-    http_response_code(400); // Code de réponse HTTP 400 pour requête incorrecte
+    // Répondre avec un code d'erreur 400 et un message en cas d'exception
+    http_response_code(400);
     echo json_encode([
-        'error' => 'Erreur de suppression',
-        'message' => $e->getMessage() // Inclure le message d'erreur pour le débogage
+        'error' => 'Erreur lors de la suppression de la tâche', 
+        'message' => $e->getMessage()
     ]);
 }
 ?>

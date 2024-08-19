@@ -19,7 +19,7 @@ const TaskList = () => {
     // Fonction pour récupérer les tâches depuis le service
     const fetchTasks = async () => {
         const response = await getTasks();
-        setTasks(response.data);
+        setTasks(response);
     };
 
     // Fonction pour créer une nouvelle tâche
