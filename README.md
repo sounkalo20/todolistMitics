@@ -22,6 +22,7 @@ Le backend est développé en PHP  et expose une API RESTful pour gérer les tâ
   - `backend/api/delete.php` : Endpoint pour supprimer une tâche.
   - `backend/connexion_bd.php` : Fichier de connexion à la base de données.
   - `backend/token/verifyToken.php` : Vérification du token de sécurité.
+  - `backend/config/todolist_db` : base de donnees de l'application.
 
 ### Frontend
 

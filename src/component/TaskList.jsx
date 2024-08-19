@@ -43,8 +43,8 @@ const TaskList = () => {
 
     // Filtrer les tâches en fonction du filtre sélectionné
     const filteredTasks = tasks.filter(task => {
-        if (filter === 'completed') return task.completed;
-        if (filter === 'incomplete') return !task.completed;
+        if (filter === 'completed') return task.completed == 1;
+        if (filter === 'incomplete') return task.completed == 0;
         return true; // 'all'
     });
 
