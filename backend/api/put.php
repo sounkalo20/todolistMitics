@@ -39,6 +39,9 @@ try {
     $description = isset($data['description']) ? $data['description'] : $task['description'];
     $completed = isset($data['completed']) ? (int)$data['completed'] : $task['completed'];
 
+    // Debug : Afficher les valeurs reçues et celles utilisées
+    error_log("Title: $title, Description: $description, Completed: $completed, ID: $id");
+
     // Préparer la requête SQL pour mettre à jour la tâche
     $stmt = $pdo->prepare("UPDATE tasks SET title = :title, description = :description, completed = :completed WHERE id = :id");
 
@@ -55,11 +58,19 @@ try {
 
     // Répondre avec un message de succès
     echo json_encode(['message' => 'Tâche mise à jour avec succès']);
+} catch (PDOException $e) {
+    // Gestion des erreurs spécifiques à PDO
+    http_response_code(500);
+    echo json_encode([
+        'error' => 'Erreur PDO',
+        'message' => $e->getMessage()
+    ]);
 } catch (Exception $e) {
-    // Répondre avec une erreur
+    // Répondre avec une erreur générique
     http_response_code(400);
     echo json_encode([
         'error' => 'Erreur lors de la mise à jour de la tâche',
         'message' => $e->getMessage()
     ]);
 }
+?>
