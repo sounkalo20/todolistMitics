@@ -26,7 +26,7 @@ try {
     verifyToken($data['token']);
 
     // Préparer la requête SQL pour insérer une nouvelle tâche dans la base de données
-    $stmt = $pdo->prepare("INSERT INTO tasks (title, description) VALUES (:title, :description");
+    $stmt = $pdo->prepare("INSERT INTO tasks (title, description) VALUES (:title, :description)");
 
     // Lier les paramètres de la requête aux valeurs fournies dans le corps de la requête
     $stmt->bindParam(':title', $data['title']);
