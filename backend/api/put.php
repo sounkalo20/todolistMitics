@@ -37,7 +37,7 @@ try {
     // Mettre à jour les champs uniquement si de nouvelles valeurs sont fournies
     $title = isset($data['title']) ? $data['title'] : $task['title'];
     $description = isset($data['description']) ? $data['description'] : $task['description'];
-    $completed = isset($data['completed']) ? (int)$data['completed'] : $task['completed'];
+    $completed = isset($data['completed']) ? (int)$data['completed'] : (int)$task['completed'];
 
     // Debug : Afficher les valeurs reçues et celles utilisées
     error_log("Title: $title, Description: $description, Completed: $completed, ID: $id");

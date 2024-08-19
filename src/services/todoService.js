@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base URL de l'API
-const API_URL = 'http://localhost/todoList/todolist/backend/api';
+const API_URL = 'http://localhost/todolistMitics/backend/api';
 
 // Token non haché
 const TOKEN = 'aB3$eT1*Xz7&';

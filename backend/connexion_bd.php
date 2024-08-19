@@ -4,8 +4,8 @@
 // Informations de connexion
 $host = 'localhost';
 $db = 'todolist_db';
-$user = 'root1';
-$pass = 'root1';
+$user = 'root';
+$pass = '';
 
 try {
     // Connexion à la base de données avec PDO
