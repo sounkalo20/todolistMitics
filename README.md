@@ -50,6 +50,9 @@ Le frontend est développé avec React et fournit une interface utilisateur pour
      - `description` : Description de la tâche (optionnelle).
      - `completed` : Statut de la tâche (boolean, par défaut false).
      - `created_at` et `updated_at` (facultatifs) : Horodatages pour la création et la mise à jour.
+  
+  - Vous pouvez aussi importez la base prete et fonctionnelle qui se trouve dans le dossier suivant : 
+    - `backend/config/todolist_db`
 
    - Configurez le fichier `backend/connexion_bd.php` avec vos informations de connexion à la base de données :
      ```php
