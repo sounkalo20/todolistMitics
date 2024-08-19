@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# To-Do List Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+Cette application de gestion de tâches (To-Do List) permet aux utilisateurs de créer, lire, mettre à jour et supprimer des tâches. Le backend est développé en PHP avec une base de données MySQL, tandis que le frontend est construit en React.
 
-## Available Scripts
+## Structure du Projet
 
-In the project directory, you can run:
+### Backend
 
-### `npm start`
+Le backend est développé en PHP  et expose une API RESTful pour gérer les tâches.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **API Endpoints** :
+  - `POST /tasks` : Créer une nouvelle tâche.
+  - `GET /tasks` : Récupérer la liste des tâches.
+  - `PUT /tasks/:id` : Mettre à jour une tâche spécifique.
+  - `DELETE /tasks/:id` : Supprimer une tâche spécifique.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Fichiers** :
+  - `backend/api/get.php` : Endpoint pour récupérer les tâches.
+  - `backend/api/post.php` : Endpoint pour créer une nouvelle tâche.
+  - `backend/api/put.php` : Endpoint pour mettre à jour une tâche.
+  - `backend/api/delete.php` : Endpoint pour supprimer une tâche.
+  - `backend/connexion_bd.php` : Fichier de connexion à la base de données.
+  - `backend/token/verifyToken.php` : Vérification du token de sécurité.
 
-### `npm test`
+### Frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Le frontend est développé avec React et fournit une interface utilisateur pour interagir avec l'API.
 
-### `npm run build`
+- **Fichiers** :
+  - `frontend/public/index.html` : Fichier HTML principal.
+  - `frontend/src/components/Task.js` : Composant pour afficher une tâche.
+  - `frontend/src/components/TaskForm.js` : Composant pour créer et éditer une tâche.
+  - `frontend/src/components/TaskList.js` : Composant pour afficher la liste des tâches.
+  - `frontend/src/components/TaskEditForm.js` : Composant pour éditer une tâche.
+  - `frontend/src/App.js` : Composant principal de l'application.
+  - `frontend/src/index.js` : Point d'entrée de l'application React.
+  - `frontend/src/services/todoService.js` : Fonctions pour appeler l'API.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Backend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Configuration de la base de données** :
+   - Assurez-vous d'avoir une base de données MySQL en fonctionnement.
+   - Créez une base de données et une table `tasks` avec les colonnes suivantes :
+     - `id` : Identifiant unique (auto-incrémenté).
+     - `title` : Titre de la tâche (obligatoire).
+     - `description` : Description de la tâche (optionnelle).
+     - `completed` : Statut de la tâche (boolean, par défaut false).
+     - `created_at` et `updated_at` (facultatifs) : Horodatages pour la création et la mise à jour.
 
-### `npm run eject`
+   - Configurez le fichier `backend/connexion_bd.php` avec vos informations de connexion à la base de données :
+     ```php
+     $pdo = new PDO('mysql:host=localhost;dbname=nom_de_votre_base', 'utilisateur', 'mot_de_passe');
+     ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Démarrer le serveur PHP** :
+   - Placez le dossier `backend` dans le répertoire web de votre serveur (par exemple, `htdocs` pour XAMPP ou `www` pour WAMP).
+   - Accédez à l'URL correspondante dans votre navigateur, par exemple : `http://localhost/backend`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Frontend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Installer les dépendances** :
+   https://github.com/sounkalo20/todolistMitics.git
+   cd todolistMitics
+   npm install
+   npm start
